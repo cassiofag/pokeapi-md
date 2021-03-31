@@ -1,16 +1,16 @@
 FactoryBot.define do
   factory :pokemon do
     pokedex_number { 1 }
-    name { "MyString" }
-    type_1 { "MyString" }
-    type_2 { "MyString" }
-    total { 1 }
-    hp { 1 }
-    attack { 1 }
-    defense { 1 }
-    sp_atk { 1 }
-    sp_def { 1 }
-    speed { 1 }
+    name { "Bulbassaur" }
+    type_1 { "Grass" }
+    type_2 { "Poison" }
+    total { 320 }
+    hp { 80 }
+    attack { 40 }
+    defense { 40 }
+    sp_atk { 60 }
+    sp_def { 60 }
+    speed { 40 }
     generation { 1 }
     legendary { false }
   end
