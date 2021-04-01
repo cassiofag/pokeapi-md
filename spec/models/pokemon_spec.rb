@@ -197,4 +197,21 @@ RSpec.describe Pokemon, type: :model do
       expect(pokemon.errors[:legendary]).to include("is not included in the list")
     end
   end
+
+  describe '.pokedex_order' do
+    it 'should return pokemons ordered by their pokedex_number' do
+      pokemon_first = FactoryBot.create(:pokemon, pokedex_number: 2)
+      pokemon_last = FactoryBot.create(:pokemon, pokedex_number: 4)
+
+      expect(described_class.pokedex_order).to eq(
+        [pokemon_first, pokemon_last]
+      )
+
+      pokemon_last.update_column(:pokedex_number, 1)
+
+      expect(described_class.pokedex_order).to eq(
+        [pokemon_last, pokemon_first]
+      )
+    end
+  end
 end

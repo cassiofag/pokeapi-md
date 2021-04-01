@@ -11,4 +11,6 @@ class Pokemon < ApplicationRecord
     validates :speed, presence: true, numericality: { only_integer: true, greater_than: 0 }
     validates :generation, presence: true, numericality: { only_integer: true, greater_than: 0 }
     validates :legendary, :inclusion => {:in => [true, false]}
+
+    scope :pokedex_order, -> { order(pokedex_number: :asc) }
 end

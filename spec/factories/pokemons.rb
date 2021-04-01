@@ -1,7 +1,11 @@
 FactoryBot.define do
+  sequence :name do |n|
+    "Pokemon #{n}"
+  end
+
   factory :pokemon do
     pokedex_number { 1 }
-    name { "Bulbassaur" }
+    name { generate(:name) }
     type_1 { "Grass" }
     type_2 { "Poison" }
     total { 320 }
