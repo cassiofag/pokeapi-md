@@ -119,4 +119,158 @@ RSpec.describe PokemonsController do
       end
     end
   end
+
+  describe '#create' do
+    subject { post '/pokemons' }
+    context 'when invalid parameters provided' do
+      let(:invalid_attributes) do
+        {
+          data: {
+            attributes: {
+              pokedex_number: nil,
+              name: '',
+              type_1: '',
+              total: 0
+            }
+          }
+        }
+      end
+      subject { post '/pokemons', params: invalid_attributes }
+
+      it 'should return 422 status code' do
+        subject
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'should return proper error json' do
+        subject
+        expect(json[:errors]).to include(
+          {
+            detail: "can't be blank",
+            source: { pointer: "/data/attributes/pokedex_number" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "is not a number",
+            source: { pointer: "/data/attributes/pokedex_number" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "can't be blank",
+            source: { pointer: "/data/attributes/name" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "can't be blank",
+            source: { pointer: "/data/attributes/type_1" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "must be greater than 0",
+            source: { pointer: "/data/attributes/total" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "can't be blank",
+            source: { pointer: "/data/attributes/hp" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "is not a number",
+            source: { pointer: "/data/attributes/hp" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "can't be blank",
+            source: { pointer: "/data/attributes/attack" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "is not a number",
+            source: { pointer: "/data/attributes/attack" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "can't be blank",
+            source: { pointer: "/data/attributes/defense" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "is not a number",
+            source: { pointer: "/data/attributes/defense" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "can't be blank",
+            source: { pointer: "/data/attributes/sp_atk" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "is not a number",
+            source: { pointer: "/data/attributes/sp_atk" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "can't be blank",
+            source: { pointer: "/data/attributes/sp_def" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "is not a number",
+            source: { pointer: "/data/attributes/sp_def" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "can't be blank",
+            source: { pointer: "/data/attributes/speed" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "is not a number",
+            source: { pointer: "/data/attributes/speed" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "can't be blank",
+            source: { pointer: "/data/attributes/generation" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "is not a number",
+            source: { pointer: "/data/attributes/generation" },
+            status: "422",
+            title: "invalid request"
+          },
+          {
+            detail: "must be true or false",
+            source: { pointer: "/data/attributes/legendary" },
+            status: "422",
+            title: "invalid request"
+          }
+        )
+      end
+    end
+
+    context 'when success request sent' do
+      
+    end
+  end
 end
