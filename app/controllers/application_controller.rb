@@ -23,13 +23,15 @@ class ApplicationController < ActionController::API
   end
 
   def map_validation_error(errors)
-    errors.reduce([]) do |r, (att)|
-      r << {
+    errors_array = []
+    errors.each do |error|
+      errors_array << {
         status: "422",
         title: "invalid request",
-        detail: errors.messages_for(att.attribute).first,
-        source: { pointer: "/data/attributes/#{att.attribute}" }
+        detail: error.message,
+        source: { pointer: "/data/attributes/#{error.attribute}" }
       }
     end
+    errors_array
   end
 end
