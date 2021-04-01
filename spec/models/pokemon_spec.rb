@@ -194,7 +194,7 @@ RSpec.describe Pokemon, type: :model do
     it 'has an invalid legendary' do
       pokemon.legendary = nil
       expect(pokemon).not_to be_valid
-      expect(pokemon.errors[:legendary]).to include("is not included in the list")
+      expect(pokemon.errors[:legendary]).to include("must be true or false")
     end
   end
 
