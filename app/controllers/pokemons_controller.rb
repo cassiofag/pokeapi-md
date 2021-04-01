@@ -6,6 +6,11 @@ class PokemonsController < ApplicationController
     render_collection(paginated_result)
   end
 
+  def show
+    pokemon = Pokemon.find(params[:id])
+    render json: serializer.new(pokemon), status: :ok
+  end
+
   def serializer
     PokemonSerializer
   end
