@@ -17,6 +17,18 @@ class PokemonsController < ApplicationController
     render json: serializer.new(pokemon), status: :created
   end
 
+  def update
+    pokemon = Pokemon.find(params[:id])
+    pokemon.update!(pokemon_params)
+    render json: serializer.new(pokemon), status: :ok
+  end
+
+  def destroy
+    pokemon = Pokemon.find(params[:id])
+    pokemon.destroy!
+    head :no_content
+  end
+
   def pokemon_params
     params.require(:data).require(:attributes).permit(
       :pokedex_number,
