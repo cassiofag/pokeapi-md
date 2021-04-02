@@ -9,6 +9,10 @@ RSpec.describe '/pokemons routes' do
     expect(get '/pokemons/1').to route_to('pokemons#show', id: '1')
   end
 
+  it 'should routes to pokemon#pokedex' do
+    expect(get '/pokemons/pokedex/1').to route_to('pokemons#pokedex', id: '1')
+  end
+
   it 'should routes to pokemons#create' do
     expect(post '/pokemons').to route_to('pokemons#create')
   end
