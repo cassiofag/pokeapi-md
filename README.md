@@ -8,7 +8,7 @@ Please run ```bundle install```, ```rails db:migrate``` and ```rails db:seed``` 
 
 List of all pokemon paginated:
 - GET ```/pokemons```
-- GET ```/pokemons?page[number]=10&page[size]=100```
+- GET ```/pokemons?page[number]=2&page[size]=50```
 
 Get a single pokemon by id:
 - GET ```/pokemons/:id```
