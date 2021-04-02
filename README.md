@@ -32,6 +32,51 @@ Get a single pokemon by id:
 
 Get a list of pokemons related by their pokedex number:
 - GET ```/pokemons/pokedex/:pokedex_number```
+- Some pokemons have more than one "form" and they are all classified under the same pokedex number, with this endpoint you can retrieve all forms for a specific pokemon based on their pokedex number.
+```
+{
+    "data": [
+        {
+            "id": "3",
+            "type": "pokemon",
+            "attributes": {
+                "pokedex_number": 3,
+                "name": "Venusaur",
+                "type_1": "Grass",
+                "type_2": "Poison",
+                "total": 525,
+                "hp": 80,
+                "attack": 82,
+                "defense": 83,
+                "sp_atk": 100,
+                "sp_def": 100,
+                "speed": 80,
+                "generation": 1,
+                "legendary": false
+            }
+        },
+        {
+            "id": "4",
+            "type": "pokemon",
+            "attributes": {
+                "pokedex_number": 3,
+                "name": "VenusaurMega Venusaur",
+                "type_1": "Grass",
+                "type_2": "Poison",
+                "total": 625,
+                "hp": 80,
+                "attack": 100,
+                "defense": 123,
+                "sp_atk": 122,
+                "sp_def": 120,
+                "speed": 80,
+                "generation": 1,
+                "legendary": false
+            }
+        }
+    ]
+}
+```
 
 Create a pokemon:
 - POST ```/pokemons```
