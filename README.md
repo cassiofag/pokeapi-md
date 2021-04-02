@@ -1,24 +1,42 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Application developed with Ruby version 2.7.2 and Rails 6.1.3.1
 
-Things you may want to cover:
+Please run ```bundle install```, ```rails db:migrate``` and ```rails db:seed``` before run the application
 
-* Ruby version
+# Routes
 
-* System dependencies
+List of all pokemon paginated:
+- GET ```/pokemons```
+- GET ```/pokemons?page[number]=10&page[size]=100```
 
-* Configuration
+Get a single pokemon by id:
+- GET ```/pokemons/:id```
 
-* Database creation
+Get a list of pokemons related by their pokedex number:
+- GET ```/pokemons/pokedex/:pokedex_number```
 
-* Database initialization
+Create a pokemon:
+- POST ```/pokemons```
 
-* How to run the test suite
+Update a pokemon:
+- PUT ```/pokemons/:id```
+- PATCH ```/pokemons/:id```
 
-* Services (job queues, cache servers, search engines, etc.)
+Delete a pokemon
+- DELETE ```/pokemons/:id```
 
-* Deployment instructions
+# Unit Tests
+Unit tests where written using Rspec, execute one of the following commands
 
-* ...
+To execute all tests togheter:
+```rspec```
+
+To execute model tests only:
+```rspec spec/models/pokemon_spec.rb```
+
+To execute requests tests only:
+```rspec spec/requests/pokemons_spec.rb```
+
+To execute routing tests only:
+```rspec spec/routing/pokemons_spec.rb```
