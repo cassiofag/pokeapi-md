@@ -4,7 +4,7 @@ Application developed with Ruby version 2.7.2 and Rails 6.1.3.1
 
 Please run ```bundle install```, ```rails db:migrate``` and ```rails db:seed``` before run the application
 
-If you are on a local enviroment you will need to run ```rails db:migrate RAILS_ENV=test```
+If you need to run the unit tests, please also run ```rails db:migrate RAILS_ENV=test``` before executing the ```rspec``` command
 
 # Object
 The Pokemon object has all attributes bellow, at the side of each one there is a list of validations performed on them.
