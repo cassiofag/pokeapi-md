@@ -69,18 +69,20 @@ RSpec.describe PokemonsController do
 
   describe '#show' do
     let(:pokemon) { create(:pokemon) }
-    subject { get "/pokemons/#{pokemon.id}" }
-    before { subject }
+    subject { get "/pokemons/#{pokemon.pokedex_number}" }
 
     it 'should return 200 status code' do
+      subject
       expect(response).to have_http_status(:ok)
     end
 
     it 'should return a proper json' do
+      pokemon2 = create(:pokemon, pokedex_number: pokemon.pokedex_number)
+      subject
       aggregate_failures do
-        expect(json_data[:id]).to eq(pokemon.id.to_s)
-        expect(json_data[:type]).to eq('pokemon')
-        expect(json_data[:attributes]).to eq(
+        expect(json_data.first[:id]).to eq(pokemon.id.to_s)
+        expect(json_data.first[:type]).to eq('pokemon')
+        expect(json_data.first[:attributes]).to eq(
           {
             pokedex_number: pokemon.pokedex_number,
             name: pokemon.name,
@@ -95,6 +97,25 @@ RSpec.describe PokemonsController do
             speed: pokemon.speed,
             generation: pokemon.generation,
             legendary: pokemon.legendary
+          }
+        )
+        expect(json_data[1][:id]).to eq(pokemon2.id.to_s)
+        expect(json_data[1][:type]).to eq('pokemon')
+        expect(json_data[1][:attributes]).to eq(
+          {
+            pokedex_number: pokemon2.pokedex_number,
+            name: pokemon2.name,
+            type_1: pokemon2.type_1,
+            type_2: pokemon2.type_2,
+            total: pokemon2.total,
+            hp: pokemon2.hp,
+            attack: pokemon2.attack,
+            defense: pokemon2.defense,
+            sp_atk: pokemon2.sp_atk,
+            sp_def: pokemon2.sp_def,
+            speed: pokemon2.speed,
+            generation: pokemon2.generation,
+            legendary: pokemon2.legendary
           }
         )
       end
