@@ -18,10 +18,45 @@ Get a list of pokemons related by their pokedex number:
 
 Create a pokemon:
 - POST ```/pokemons```
+- All mandatory attributes need to be sent:
+```
+{
+    "data": {
+        "attributes": {
+            "pokedex_number": 9999,
+            "name": "MissingNo",
+            "type_1": "Normal",
+            "type_2": "Psychic",
+            "total": 300,
+            "hp": 50,
+            "attack": 50,
+            "defense": 50,
+            "sp_atk": 50,
+            "sp_def": 50,
+            "speed": 50,
+            "generation": 1,
+            "legendary": true
+        }
+    }
+}
+```
 
 Update a pokemon:
 - PUT ```/pokemons/:id```
 - PATCH ```/pokemons/:id```
+- Only the attributes that will be updated need to be sent:
+```
+{
+    "data": {
+        "attributes": {
+            "pokedex_number": 9999,
+            "name": "MissingNo",
+            "type_1": "Normal",
+            "type_2": "Water"
+        }
+    }
+}
+```
 
 Delete a pokemon
 - DELETE ```/pokemons/:id```
