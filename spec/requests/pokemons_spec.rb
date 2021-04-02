@@ -69,7 +69,60 @@ RSpec.describe PokemonsController do
 
   describe '#show' do
     let(:pokemon) { create(:pokemon) }
-    subject { get "/pokemons/#{pokemon.pokedex_number}" }
+    subject { get "/pokemons/#{pokemon.id}" }
+    before { subject }
+
+    it 'should return 200 status code' do
+      expect(response).to have_http_status(:ok)
+    end
+
+    it 'should return a proper json' do
+      aggregate_failures do
+        expect(json_data[:id]).to eq(pokemon.id.to_s)
+        expect(json_data[:type]).to eq('pokemon')
+        expect(json_data[:attributes]).to eq(
+          {
+            pokedex_number: pokemon.pokedex_number,
+            name: pokemon.name,
+            type_1: pokemon.type_1,
+            type_2: pokemon.type_2,
+            total: pokemon.total,
+            hp: pokemon.hp,
+            attack: pokemon.attack,
+            defense: pokemon.defense,
+            sp_atk: pokemon.sp_atk,
+            sp_def: pokemon.sp_def,
+            speed: pokemon.speed,
+            generation: pokemon.generation,
+            legendary: pokemon.legendary
+          }
+        )
+      end
+    end
+
+    context 'when the record is not found' do
+      subject { get '/pokemons/x' }
+
+      it 'should return a 404 status code' do
+        subject
+        expect(response).to have_http_status(:not_found)
+      end
+
+      it 'should return a proper error json' do
+        subject
+          expect(json[:errors]).to include(
+            title: 'Record not Found',
+            status: "404",
+            detail: 'We could not find the object you were looking for.',
+            source: { pointer: '/request/url/:id' }
+          )
+      end
+    end
+  end
+
+  describe '#pokedex' do
+    let(:pokemon) { create(:pokemon) }
+    subject { get "/pokemons/pokedex/#{pokemon.pokedex_number}" }
 
     it 'should return 200 status code' do
       subject
@@ -122,7 +175,7 @@ RSpec.describe PokemonsController do
     end
 
     context 'when the record is not found' do
-      subject { get '/pokemons/x' }
+      subject { get '/pokemons/pokedex/x' }
 
       it 'should return a 404 status code' do
         subject

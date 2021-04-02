@@ -7,6 +7,11 @@ class PokemonsController < ApplicationController
   end
 
   def show
+    pokemon = Pokemon.find(params[:id])
+    render json: serializer.new(pokemon), status: :ok
+  end
+
+  def pokedex
     pokemon = Pokemon.where(pokedex_number: params[:id])
     if pokemon.empty?
       raise ActiveRecord::RecordNotFound
